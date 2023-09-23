@@ -1,4 +1,5 @@
-﻿namespace NumbersGame
+﻿// Linus Aspelöf SUT23
+namespace NumbersGame
 {
     internal class Program
     {
@@ -11,20 +12,25 @@
             bool win = false;
             
             Console.Clear();
-            Console.WriteLine("\n\tDu ska nu gissa på ett nummer mellan 1 och 20" +
-                "\n\tDu har 5 försök lycka till!");
+            Console.WriteLine("\n\tVälkommen! Jag tänker på ett nummer. " +
+                "\n\tKan du gissa vilket? Du får fem försök.");
 
             for(int i = 0; i < 5; i++)
             {
                 Console.Clear();
                 Console.Write("\n\tGissa nummret: ");
-                int.TryParse(Console.ReadLine(), out input2);
 
-                if (input2 == nr)
+                if (!int.TryParse(Console.ReadLine(), out input2))
+                {
+                    i--;
+                    Console.WriteLine("\n\tError: Ogiltigt input, vänligen ange ett heltal");
+                    Console.ReadKey();
+                }
+                else if (input2 == nr)
                 {
                     win = true;
-                    Console.WriteLine($"\n\t!!Grattis!! " +
-                        $"\n\t{nr} var rätt svar, du vann! ");
+                    Console.WriteLine($"\n\tWoho! Du gjorde det! " +
+                        $"\n\t{nr} var rätt svar, du vann!");
                     Console.ReadKey();
                     break;
                 }
@@ -40,15 +46,10 @@
                         $"\n\tDu har {(4-i)} försök kvar");
                     Console.ReadKey();
                 }
-                else
-                {
-                    Console.WriteLine("\n\tError: Ogiltigt input, vänligen ange ett heltal");
-                    Console.ReadKey();
-                }
             }
             if (win == false)
             {
-                Console.WriteLine("\n\tDu vann tyvärr inte den här gången" +
+                Console.WriteLine("\n\tTyvärr du lyckades inte gissa talet på fem försök!" +
                     "\n\tBättre lycka nästa gång!");
                 Console.ReadKey();
             }
@@ -77,6 +78,10 @@
                         Console.WriteLine("Programmet avslutas...");
                         Console.ReadKey();
                         run = false;
+                        break;
+                    default:
+                        Console.WriteLine("\n\tError: Ogiltigt input, vänligen ange ett heltal");
+                        Console.ReadKey();
                         break;
                 }
             }
