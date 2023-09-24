@@ -3,9 +3,10 @@ namespace NumbersGame
 {
     internal class Program
     {
+        // Placed the game itself in a separate method to keep "Main" clean
         static void Game()
         {
-            // creates the random number
+            // Creates the random number
             var rnd = new Random();
             int nr = rnd.Next(1,21);
             int input2 = 0;
@@ -15,6 +16,7 @@ namespace NumbersGame
             Console.WriteLine("\n\tVälkommen! Jag tänker på ett nummer. " +
                 "\n\tKan du gissa vilket? Du får fem försök.");
 
+            // Loops 5 times
             for(int i = 0; i < 5; i++)
             {
                 Console.Clear();
@@ -22,12 +24,14 @@ namespace NumbersGame
 
                 if (!int.TryParse(Console.ReadLine(), out input2))
                 {
+                    // "i--;" So that the error doesn't count towards the loop
                     i--;
                     Console.WriteLine("\n\tError: Ogiltigt input, vänligen ange ett heltal");
                     Console.ReadKey();
                 }
                 else if (input2 == nr)
                 {
+                    // "break" the loop after win
                     win = true;
                     Console.WriteLine($"\n\tWoho! Du gjorde det! " +
                         $"\n\t{nr} var rätt svar, du vann!");
@@ -54,7 +58,7 @@ namespace NumbersGame
                 Console.ReadKey();
             }
         }
-        static void Main(string[] args)
+        static void Menu()
         {
             bool run = true;
 
@@ -85,6 +89,10 @@ namespace NumbersGame
                         break;
                 }
             }
+        }
+        static void Main(string[] args)
+        {
+            Menu();
         }
     }
 }
